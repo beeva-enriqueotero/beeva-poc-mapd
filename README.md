@@ -7,6 +7,16 @@ Proof of Concept with MapD at BEEVA
 
 *Note: instance ssh user is "centos" and not "ec2-user"*
 
+### Prepare benchmark
+Edit `create_tables.sql`
+```
+read MAPD_PASSWORD
+export MAPD_PASSWORD
+/raidStorage/prod/mapd/bin/mapdql -u mapd -p $MAPD_PASSWORD < create_tables.sql
+sudo yum install -y python-pip
+pip install --upgrade --user awscli
+aws s3 cp s3://awssampledbuswest2/ssbgz/customer - | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --batch 100000
+```
 
 ### Additional comments
 - Many broken links in documentation
