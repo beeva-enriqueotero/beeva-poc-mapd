@@ -5,6 +5,8 @@ Proof of Concept with MapD at BEEVA
 ### Deploy on premise
 - Use [MapD AMI (Community) from AWS Marketplace](https://aws.amazon.com/marketplace/pp/B071H71L2Y)
 
+*Note: instance ssh user is "centos" and not "ec2-user"*
+
 
 ### Additional comments
 - Many broken links in documentation
