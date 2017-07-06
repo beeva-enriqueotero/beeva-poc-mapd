@@ -10,11 +10,27 @@ Proof of Concept with MapD at BEEVA
 ### Prepare benchmark
 Edit `create_tables.sql`
 ```
+sudo yum install -y nano
+nano create-table.sql
+# go to http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-create-test-data.html
+# copy to cliboard, paste and save file
+```
+Create tables
+```
 read MAPD_PASSWORD
+# MAPD_PASSWORD value is the instance id
 export MAPD_PASSWORD
 /raidStorage/prod/mapd/bin/mapdql -u mapd -p $MAPD_PASSWORD < create_tables.sql
+```
+
+Install aws cli to access to S3 files
+```
 sudo yum install -y python-pip
 pip install --upgrade --user awscli
+```
+
+Ingest data
+```
 aws s3 cp s3://awssampledbuswest2/ssbgz/customer - | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --batch 100000
 ```
 
