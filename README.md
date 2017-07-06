@@ -11,7 +11,7 @@ Proof of Concept with MapD at BEEVA
 Edit `create_tables.sql`
 ```
 sudo yum install -y nano
-nano create-table.sql
+nano create_tables.sql
 # go to http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-create-test-data.html
 # copy to cliboard, paste and save file
 ```
@@ -31,7 +31,8 @@ pip install --upgrade --user awscli
 
 Ingest data
 ```
-aws s3 cp s3://awssampledbuswest2/ssbgz/customer - | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --batch 100000
+# Remember to attach a role to your instance to have access to s3
+aws s3 cp s3://awssampledbuswest2/ssbgz/customer - | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --batch 1000
 ```
 
 ### Additional comments
