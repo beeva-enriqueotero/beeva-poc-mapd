@@ -31,7 +31,7 @@ sudo yum install -y python-pip
 pip install --upgrade --user awscli
 ```
 
-Ingest data (Slower alternative. 15 mins each 75M rows)
+Ingest data directly from S3 (Slower alternative. 15 mins each 75M rows)
 ```
 # Remember to attach a role to your instance to have access to s3
 aws s3 cp s3://awssampledbuswest2/ssbgz/customer0002_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
@@ -51,7 +51,7 @@ time aws s3 cp s3://awssampledbuswest2/ssbgz/part0003_part_00.gz - | gzip -d | /
 ```
 
 
-Ingest data (Faster alternative. 4 mins each 75M rows)
+Ingest data by copying files locally (Faster alternative. 4 mins each 75M rows)
 ```
 time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0000_part_00.gz .
 time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0001_part_00.gz .
@@ -82,6 +82,7 @@ COPY lineorder from '/home/centos/lineorder0007_part_00' WITH (delimiter = '|', 
 ### Execute benchmark
 
 See http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-test-performance.html
+use \timing to measure times
 
 ### Results
 
@@ -93,7 +94,8 @@ See http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-test-pe
 
 *Notes*: 
 - First execution of query 1 was much slower, 160s aprox.
-- In none of these cases `nvidia-smi` shows Volatile GPU-util > 0% 
+- In none of these cases `nvidia-smi` shows Volatile GPU-util > 0%
+- Tables are stored in ephemeral disk. So database could be lost after reboot.
 
 ### Additional comments
 - Many broken links in documentation
