@@ -89,10 +89,10 @@ See http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-test-pe
 
 * Query 2: `exception: Query would require a scan without a limit on table(s): lineorder, dwdate`
 
-* Query 3: `Exception: SlabTooBig`
+* Query 3: `Exception: SlabTooBig`, after 52s of execution.
 
 *Notes*: 
-- First Query 1 execution was slower, 10s aprox.
+- First execution of query 1 was much slower, 160s aprox.
 - In none of these cases `nvidia-smi` shows Volatile GPU-util > 0% 
 
 ### Additional comments
