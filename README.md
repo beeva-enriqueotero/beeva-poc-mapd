@@ -8,6 +8,8 @@ Proof of Concept with MapD at BEEVA
 *Note: instance ssh user is "centos" and not "ec2-user"*
 
 ### Prepare benchmark
+*Based on [Redshift benchmark tutorial](http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-create-test-data.html)*
+
 Edit `create_tables.sql`
 ```
 sudo yum install -y nano
@@ -77,10 +79,25 @@ COPY lineorder from '/home/centos/lineorder0006_part_00' WITH (delimiter = '|', 
 COPY lineorder from '/home/centos/lineorder0007_part_00' WITH (delimiter = '|', header = 'false') ;
 # In case no free space on disk rm -rf lineorder000i_part_00 will be required after each copy
 ```
+### Execute benchmark
+
+See http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-test-performance.html
+
+### Results
+
+* Query 1: `revenue = 32879160652772` after 0.3s
+
+* Query 2: `exception: Query would require a scan without a limit on table(s): lineorder, dwdate`
+
+* Query 3: `Exception: SlabTooBig`
+
+*Notes*: 
+- First Query 1 execution was slower, 10s aprox.
+- In none of these cases `nvidia-smi` shows Volatile GPU-util > 0% 
 
 ### Additional comments
 - Many broken links in documentation
 - Failed installation on [Deep Learning Ubuntu 14.04 AMI](https://aws.amazon.com/marketplace/pp/B06VSPXKDX) 
 following [install guidelines](https://github.com/mapd/mapd-core#ubuntu-1604-1610). Error: Unable to install `clang-format`
 - Mapd Benchmark tutorial vs Redshift and others: http://tech.marksblogg.com/benchmarks.html (howto: http://tech.marksblogg.com/billion-nyc-taxi-rides-aws-ec2-p2-8xlarge-mapd.html)
-- Redshift benchmark Tutorial: http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-create-test-data.html
+
