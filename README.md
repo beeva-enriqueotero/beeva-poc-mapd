@@ -29,7 +29,7 @@ sudo yum install -y python-pip
 pip install --upgrade --user awscli
 ```
 
-Ingest data
+Ingest data (Slower alternative. 15 mins each 75M rows)
 ```
 # Remember to attach a role to your instance to have access to s3
 aws s3 cp s3://awssampledbuswest2/ssbgz/customer0002_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
@@ -42,6 +42,40 @@ time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0004_part_00.gz - | gzip -
 time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0005_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
 time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0006_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
 time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0007_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/part0000_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert part mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/part0001_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert part mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/part0002_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert part mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/part0003_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert part mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+```
+
+
+Ingest data (Faster alternative. 4 mins each 75M rows)
+```
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0000_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0001_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0002_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0003_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0004_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0005_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0006_part_00.gz .
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0007_part_00.gz .
+time gunzip -d lineorder0000_part_00.gz
+time gunzip -d lineorder0001_part_00.gz
+time gunzip -d lineorder0002_part_00.gz
+time gunzip -d lineorder0003_part_00.gz
+time gunzip -d lineorder0004_part_00.gz
+time gunzip -d lineorder0005_part_00.gz
+time gunzip -d lineorder0006_part_00.gz
+time gunzip -d lineorder0007_part_00.gz
+COPY lineorder from '/home/centos/lineorder0000_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0001_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0002_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0003_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0004_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0005_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0006_part_00' WITH (delimiter = '|', header = 'false') ;
+COPY lineorder from '/home/centos/lineorder0007_part_00' WITH (delimiter = '|', header = 'false') ;
+# In case no free space on disk rm -rf lineorder000i_part_00 will be required after each copy
 ```
 
 ### Additional comments
