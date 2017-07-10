@@ -32,7 +32,7 @@ pip install --upgrade --user awscli
 Ingest data
 ```
 # Remember to attach a role to your instance to have access to s3
-aws s3 cp s3://awssampledbuswest2/ssbgz/customer - | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --batch 1000
+aws s3 cp s3://awssampledbuswest2/ssbgz/customer0002_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
 ```
 
 ### Additional comments
