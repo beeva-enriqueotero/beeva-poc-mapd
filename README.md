@@ -33,6 +33,15 @@ Ingest data
 ```
 # Remember to attach a role to your instance to have access to s3
 aws s3 cp s3://awssampledbuswest2/ssbgz/customer0002_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert customer mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+aws s3 cp s3://awssampledbuswest2/ssbgz/dwdate.tbl.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert dwdate mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0000_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0001_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0002_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0003_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0004_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0005_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0006_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
+time aws s3 cp s3://awssampledbuswest2/ssbgz/lineorder0007_part_00.gz - | gzip -d | /raidStorage/prod/mapd/SampleCode/StreamInsert lineorder mapd -u mapd -p $MAPD_PASSWORD --delim '|' --batch 100000 --print_error
 ```
 
 ### Additional comments
