@@ -76,6 +76,7 @@ time gunzip -d lineorder0004_part_00.gz
 time gunzip -d lineorder0005_part_00.gz
 time gunzip -d lineorder0006_part_00.gz
 time gunzip -d lineorder0007_part_00.gz
+/raidStorage/prod/mapd/bin/mapdql -u mapd -p $MAPD_PASSWORD
 COPY lineorder from '/home/centos/lineorder0000_part_00' WITH (delimiter = '|', header = 'false') ;
 COPY lineorder from '/home/centos/lineorder0001_part_00' WITH (delimiter = '|', header = 'false') ;
 COPY lineorder from '/home/centos/lineorder0002_part_00' WITH (delimiter = '|', header = 'false') ;
