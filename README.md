@@ -7,6 +7,16 @@ Proof of Concept with MapD at BEEVA
 
 *Note: instance ssh user is "centos" and not "ec2-user"*
 
+### Quick start
+Launch *mapdql*
+```
+read MAPD_PASSWORD
+# MAPD_PASSWORD value is the instance id
+export MAPD_PASSWORD
+/raidStorage/prod/mapd/bin/mapdql -u mapd -p $MAPD_PASSWORD
+# Type \h to get help
+```
+
 ### Prepare benchmark
 *Based on [Redshift benchmark tutorial](http://docs.aws.amazon.com/redshift/latest/dg/tutorial-tuning-tables-create-test-data.html)*
 
@@ -19,9 +29,6 @@ nano create_tables.sql
 ```
 Create tables
 ```
-read MAPD_PASSWORD
-# MAPD_PASSWORD value is the instance id
-export MAPD_PASSWORD
 /raidStorage/prod/mapd/bin/mapdql -u mapd -p $MAPD_PASSWORD < create_tables.sql
 ```
 
