@@ -103,6 +103,7 @@ use \timing to measure times
 - First execution of query 1 was much slower, 160s aprox.
 - In none of these cases `nvidia-smi` shows Volatile GPU-util > 0%
 - Tables are stored in ephemeral disk. So database could be lost after reboot.
+- Query 2 is forbidden by watchdog. Watchdog can be disabled with `enable_watchdog = false` in `/raidStorage/prod/mapd-storage/mapd.conf`
 
 ### Issues
  - https://community.mapd.com/t/select-field-count-from-table-group-by-field-the-result-is-confuse/151
