@@ -104,6 +104,9 @@ use \timing to measure times
 - In none of these cases `nvidia-smi` shows Volatile GPU-util > 0%
 - Tables are stored in ephemeral disk. So database could be lost after reboot.
 
+### Issues
+ - https://community.mapd.com/t/select-field-count-from-table-group-by-field-the-result-is-confuse/151
+
 ### Additional comments
 - Many broken links in documentation
 - Failed installation on [Deep Learning Ubuntu 14.04 AMI](https://aws.amazon.com/marketplace/pp/B06VSPXKDX) 
