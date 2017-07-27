@@ -103,12 +103,14 @@ use \timing to measure times
 * Query 3: `Exception: SlabTooBig`, after 52s of execution, or `TSocket::write_partial() send() <Host: localhost Port: 9091>Broken pipe`
 
 *Notes*: 
-- First execution of query 1 was much slower, 160s aprox.
+- First execution of query 1 was much slower, 60s aprox.
 - In none of these cases `nvidia-smi` shows Volatile GPU-util > 0%
 - Tables are stored in ephemeral disk. So database could be lost after reboot.
 - Query 2 is forbidden by watchdog. Watchdog can be disabled with `enable_watchdog = false` in `/raidStorage/prod/mapd-storage/mapd.conf`
+- I was not able to run queries 2 and 3 even with `enable_watchdog = false`
 
 ### Issues
+ - https://community.mapd.com/t/slabtoobig-exception/349
  - https://community.mapd.com/t/select-field-count-from-table-group-by-field-the-result-is-confuse/151
 
 ### Additional comments
