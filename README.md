@@ -107,6 +107,17 @@ use \timing to measure times
 - In none of these cases `nvidia-smi` shows Volatile GPU-util > 0%
 - Tables are stored in ephemeral disk. So database could be lost after reboot.
 - Query 2 is forbidden by watchdog. Watchdog can be disabled with `enable_watchdog = false` in `/raidStorage/prod/mapd-storage/mapd.conf`
+
+
+### Restart mapd server
+```
+export MAPD_PATH=/raidStorage/prod/mapd
+cd $MAPD_PATH
+sudo systemctl stop mapd_server
+sudo systemctl start mapd_server
+```
+### Results
+
 - I was not able to run queries 2 and 3 even with `enable_watchdog = false`
 
 ### Issues
