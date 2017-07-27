@@ -3,7 +3,7 @@ Proof of Concept with MapD at BEEVA
 
 
 ### Deploy on premise
-- Use [MapD AMI (Community) from AWS Marketplace](https://aws.amazon.com/marketplace/pp/B071H71L2Y)
+- Use [MapD AMI (Community) from AWS Marketplace](https://aws.amazon.com/marketplace/pp/B071H71L2Y). *Version MapD Community Edition - v3-1e20d964-1d79-4290-9751-5af45b74f67b-ami-1128b507.4 (ami-8967fb9f)*
 
 *Note: instance ssh user is "centos" and not "ec2-user"*
 
@@ -94,11 +94,13 @@ use \timing to measure times
 
 ### Results
 
-* Query 1: `revenue = 32879160652772` after 0.3s
+* Query 1: `revenue = 32879160652772` 
+  * 1st request: 5.0+-0.5s 
+  * next requests: 0.35+-0.05s 
 
-* Query 2: `exception: Query would require a scan without a limit on table(s): lineorder, dwdate`
+* Query 2: `exception: Query would require a scan without a limit on table(s): lineorder, dwdate` or `TSocket::write_partial() send() <Host: localhost Port: 9091>Broken pipe`
 
-* Query 3: `Exception: SlabTooBig`, after 52s of execution.
+* Query 3: `Exception: SlabTooBig`, after 52s of execution, or `TSocket::write_partial() send() <Host: localhost Port: 9091>Broken pipe`
 
 *Notes*: 
 - First execution of query 1 was much slower, 160s aprox.
