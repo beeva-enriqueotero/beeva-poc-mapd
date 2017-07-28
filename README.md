@@ -4,8 +4,12 @@ Proof of Concept with MapD at BEEVA
 
 ### Deploy on premise
 - Use [MapD AMI (Community) from AWS Marketplace](https://aws.amazon.com/marketplace/pp/B071H71L2Y). *Version MapD Community Edition - v3-1e20d964-1d79-4290-9751-5af45b74f67b-ami-1128b507.4 (ami-8967fb9f)*
+  - This AMI includes *mapd-ce-3.1.2-20170719-9b89178-Linux-x86_64-render*
+  - We tested also on *mapd-ce-3.1.3-20170727-edbb780-Linux-x86_64-render*
 
 *Note: instance ssh user is "centos" and not "ec2-user"*
+
+
 
 ### Quick start
 Launch *mapdql*
